@@ -11,4 +11,6 @@ Our team decided to build a mobile application targeted towards IDPs in Nigeria.
 
 For future enhancements, we believe it is useful to expose all the APIs to get scoring information and a consolidated criteria for ranking and attribute weights to IDP camps. This mobile application can also be easily extended to support other countries with high populations of IDPs.
 
+Google Slides Presentation: https://docs.google.com/presentation/d/1rHNgDwlG0tqA0Eh5ASR16nr69i8WCy3P0Xibnjp20bM/edit?usp=sharing
+
 **Team:** Alfonso Austin, Aleksandr Markenzon, Sneh Munshi, Khulan Myagmardorj
