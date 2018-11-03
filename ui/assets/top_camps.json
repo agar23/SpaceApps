@@ -1,0 +1,46 @@
+{ 
+    "camps": [
+        {
+            "city": "Abuja",
+            "score": 89,
+            "nearbyIdpCamp": "New Kuchingoro IDP Camp",
+            "coords": {
+                "latitude": 9.0141174,
+                "longitude": 7.3495535
+            }
+        }, {
+            "city": "Abuja",
+            "score": 89,
+            "nearbyIdpCamp": "Kuje IDP Camp",
+            "coords": {
+                "latitude": 9.0543071,
+                "longitude": 7.25427
+            }
+        }, {
+            "city": "Lagos",
+            "score": 76,
+            "nearbyIdpCamp": "Lagos IDP Camp",
+            "coords": {
+                "latitude": 6.4932649,
+                "longitude": 3.6544819
+            }
+        }, {
+            "city": "Maiduguri",
+            "score": 58,
+            "nearbyIdpCamp": "Teachers Village IDP Camp",
+            "coords": {
+                "latitude": 11.8585332,
+                "longitude": 13.1781123
+            }
+        }, {
+            "city": "Maiduguri",
+            "score": 58,
+            "nearbyIdpCamp": "National Youth Service Scheme IDP Camp",
+            "coords": {
+                "latitude": 11.840812,
+                "longitude": 13.0615935
+            }
+        }
+    ]
+}
+    
