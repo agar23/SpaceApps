@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, SafeAreaView, StyleSheet } from 'react-native';
 
-import FlatListBasics from '../components/List';
+import RecommendedList from '../components/RecommendedList';
 import Map from '../components/Map'
 import campsExt from '../assets/top_camps.json';
 import { initialRegion } from '../constants/Constants';
@@ -46,9 +46,9 @@ export default class EmergencyScreen extends React.Component {
           destLatitude={this.state.startLatitude}
           destLongitude={this.state.startLongitude}
         />
-        <FlatListBasics 
-        camps={this.state.camps}
-        setStartCoords={this.setStartCoords} 
+        <RecommendedList 
+          camps={this.state.camps}
+          setStartCoords={this.setStartCoords} 
         />
       </SafeAreaView>
     );
