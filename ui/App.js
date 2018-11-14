@@ -3,15 +3,25 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import Login from './screens/Login.js'
+import Register from './screens/Register.js'
 
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
-    loggedIn: false
+    loggedIn: false,
+    registerPage: false
   };
 
   handleLogin = () => {
     this.setState({loggedIn: true})
+  }
+
+  handleRegisterPage = () => {
+    this.setState({registerPage: true})
+  }
+  
+  handleLoginPage = () => {
+    this.setState({registerPage: false})
   }
 
   render() {
@@ -24,8 +34,11 @@ export default class App extends React.Component {
         />
       );
     }
+    else if(this.state.registerPage){
+      return(<Register loginPage={this.handleLoginPage}/>)
+    }
     else if(!this.state.loggedIn){
-      return(<Login loggin={this.handleLogin}/>)
+      return(<Login loggin={this.handleLogin} registerPage={this.handleRegisterPage}/>)
     }
     else {
       return (

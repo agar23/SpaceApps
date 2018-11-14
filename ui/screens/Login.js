@@ -20,6 +20,10 @@ export default class Login extends React.Component {
         }
     }
 
+    handleRegisterPage = () => {
+        this.props.registerPage();
+    }
+
     render(){
         return(
             <View style={styles.container}>
@@ -28,10 +32,18 @@ export default class Login extends React.Component {
                 {/*<FormValidationMessage>Error message</FormValidationMessage>*/}
 
                 <FormLabel>Password</FormLabel>
-                <FormInput ref={this.password} onChangeText={(value) => this.setState({password: value})} shake={this.state.passwordError}/>
+                <FormInput secureTextEntry={true} ref={this.password} onChangeText={(value) => this.setState({password: value})} shake={this.state.passwordError}/>
                 {/*<FormValidationMessage>Error message</FormValidationMessage>*/}
 
-                <Button title='Login' onPress={this.handleLogin}/>
+                <View style={{width: '100%'}}>
+                    <Button style={{width: '100%'}} title='Login' onPress={this.handleLogin}/>
+                </View>
+
+                <Text style={{color: 'blue', marginTop: '5%'}}
+                    onPress={() => this.handleRegisterPage()}>
+                    Register
+                </Text>
+
             </View>
         )
     }
