@@ -2,11 +2,17 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
+import Login from './screens/Login.js'
 
 export default class App extends React.Component {
   state = {
-    isLoadingComplete: false
+    isLoadingComplete: false,
+    loggedIn: false
   };
+
+  handleLogin = () => {
+    this.setState({loggedIn: true})
+  }
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -17,6 +23,9 @@ export default class App extends React.Component {
           onFinish={this._handleFinishLoading}
         />
       );
+    }
+    else if(!this.state.loggedIn){
+      return(<Login loggin={this.handleLogin}/>)
     }
     else {
       return (

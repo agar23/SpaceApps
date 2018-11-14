@@ -1,7 +1,8 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
+import { Icon } from 'react-native-elements';
+import { Ionicons } from '@expo/vector-icons';
 import TabBarIcon from '../components/TabBarIcon';
 import EmergencyScreen from '../screens/Emergency';
 import DetailsScreen from '../screens/Details';
@@ -13,12 +14,9 @@ const EmergencyStack = createStackNavigator({
 
 EmergencyStack.navigationOptions = {
   tabBarLabel: 'Emergency',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'icon-plus-sign-alt'}
-    />
-  ),
+  tabBarIcon: ({ focused }) => {
+    return <Icon name='warning'  />
+  }
 };
 
 const DetailsStack = createStackNavigator({
@@ -27,12 +25,9 @@ const DetailsStack = createStackNavigator({
 
 DetailsStack.navigationOptions = {
   tabBarLabel: 'Camps',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-location-pin'}
-    />
-  ),
+  tabBarIcon: ({ focused }) => {
+    return <Icon name='list'  />
+  },
 };
 
 export default createBottomTabNavigator({
