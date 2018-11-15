@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import { Badge } from 'react-native-elements';
-import { Text, View, TouchableOpacity, StyleSheet, Linking } from 'react-native'
-import { List, ListItem } from 'react-native-elements'
-import { Icon } from 'react-native-elements';
+import { Text, View, TouchableOpacity, StyleSheet, Linking, ScrollView } from 'react-native'
+import { List, ListItem, Divider, Badge, Icon } from 'react-native-elements'
    
 class RecommendedList extends Component {
    handleCampChoice = (item) => {
@@ -19,35 +17,35 @@ class RecommendedList extends Component {
    render() {
       return (
          <View>
-            {
-            <List containerStyle={{marginBottom: 20}}>
-                {
-                this.props.camps.map((item, index) => (
-                <ListItem
-                    key = {(item.idpCamp ? item.idpCamp : item.nearbyIdpCamp)}
-                    title = {<View style={{display: 'flex', flexDirection: 'row'}}>
-                                <View style={{width: '75%'}}>
-                                    <Text>
-                                        {(item.idpCamp ? item.idpCamp : item.nearbyIdpCamp)}
-                                    </Text>
-                                </View>
-                                <View style={{alignContent: 'flex-end', display: 'flex', flexDirection: 'row'}}>
-                                    <Badge containerStyle={styles.badge}>
-                                        <Text>{item.score}%</Text>
-                                    </Badge>
-                                </View>
-                            </View>}
-                    onPress = {() => this.handleCampChoice(item)}
-                    rightIcon = {<Icon 
-                                    name={'directions'} 
-                                    onPress={() => this.openGoogleMapsWithDirections(item.coords.latitude, item.coords.longitude)}
-                                />}
-                    >
-                </ListItem>
-                ))
-                }
-            </List>
-            }
+            <ScrollView>
+                <List>
+                    {
+                    this.props.camps.map((item, index) => (
+                    <ListItem
+                        key = {(item.idpCamp ? item.idpCamp : item.nearbyIdpCamp)}
+                        title = {<View style={{display: 'flex', flexDirection: 'row'}}>
+                                    <View style={{width: '75%'}}>
+                                        <Text>
+                                            {(item.idpCamp ? item.idpCamp : item.nearbyIdpCamp)}
+                                        </Text>
+                                    </View>
+                                    <View style={{alignContent: 'flex-end', display: 'flex', flexDirection: 'row'}}>
+                                        <Badge containerStyle={styles.badge}>
+                                            <Text>{item.score}%</Text>
+                                        </Badge>
+                                    </View>
+                                </View>}
+                        onPress = {() => this.handleCampChoice(item)}
+                        rightIcon = {<Icon 
+                                        name={'directions'} 
+                                        onPress={() => this.openGoogleMapsWithDirections(item.coords.latitude, item.coords.longitude)}
+                                    />}
+                        >
+                    </ListItem>
+                    ))
+                    }
+                </List>
+            </ScrollView>
          </View>
       )
    }
