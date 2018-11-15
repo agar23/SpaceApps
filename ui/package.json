@@ -26,6 +26,7 @@
     "react-native-maps": "^0.22.0",
     "react-native-material-design": "^0.3.7",
     "react-native-material-kit": "^0.5.1",
+    "react-native-modal": "^7.0.0",
     "react-native-popup-dialog": "^0.15.1",
     "react-navigation": "^2.16.0",
     "tcomb-form-native": "^0.6.20"

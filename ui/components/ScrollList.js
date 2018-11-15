@@ -1,18 +1,25 @@
 import React, { Component } from 'react'
-import { Badge } from 'react-native-elements';
-import { Text, View, TouchableOpacity, StyleSheet, ScrollView, Modal, TouchableHighlight, Button } from 'react-native'
+import { List, ListItem, Divider, Badge, Icon, Card } from 'react-native-elements'
+import { Text, View, TouchableOpacity, StyleSheet, ScrollView, Linking, TouchableHighlight, Button } from 'react-native'
 import data from '../assets/camp_info.json';
 import PopupDialog from 'react-native-popup-dialog';
+import Modal from "react-native-modal";
+
    
 class ScrollList extends Component {
   state = {
     modalVisible: false,
-    data: {}
+    data: {},
+    currentOpenIndex: 1 
   }
 
-   handleCampChoice = (item) => {
+   handleCampChoice = (item, index) => {
       this.setModalVisible(true);
-      this.setState({data: data[item]});
+      this.setState({data: data[item], currentOpenIndex: index});
+   }
+
+   openGoogleMapsWithDirections = (lat, long) => {
+    Linking.openURL("https://www.google.com/maps/search/?api=1&query=" + lat + "," + long)
    }
 
    setModalVisible(visible) {
@@ -23,54 +30,76 @@ class ScrollList extends Component {
      console.log(this.state.data);
       return (
         <View>
-        <ScrollView>
-          <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => { Alert.alert('Modal has been closed.'); }}>
-          <View style={{
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center'}}>
-            <View style={{
-              width: 300,
-              height: 300}}>
-              <Text>
+          <ScrollView>
+            <List>
+              
                 {
-                  Object.keys(this.state.data).map((item) => {
-                    const upper = item.charAt(0).toUpperCase() + item.substr(1);
-                    return upper + ': ' + this.state.data[item] + '\n';
-                  })
+                  this.props.camps.map((item, index) => (
+                      <ListItem
+                        key = {(item.idpCamp ? item.idpCamp : item.nearbyIdpCamp)}
+                        style = {styles.container}
+                        onPress = {() => this.handleCampChoice(item.idpCamp, index+1)}
+                        title = {<View style={{display: 'flex', flexDirection: 'row'}}>
+                                    <View style={{width: '15%'}}>
+                                        <Text style = {styles.text}>
+                                          {index + 1 }.
+                                        </Text>
+                                    </View>
+                                    <View style={{width: '60%'}}>
+                                        <Text style = {styles.text}>
+                                          {(item.idpCamp ? item.idpCamp : item.nearbyIdpCamp)}
+                                        </Text>
+                                    </View>
+                                    <View style={{alignContent: 'flex-end', display: 'flex', flexDirection: 'row'}}>
+                                        <Badge containerStyle={styles.badge}>
+                                            <Text>{item.score / 10}%</Text>
+                                        </Badge>
+                                    </View>
+                                </View>}
+                          rightIcon = {<Icon 
+                                        name={'directions'} 
+                                        onPress={() => this.openGoogleMapsWithDirections(item.coords.latitude, item.coords.longitude)}
+                                        />
+                                      }
+                                  
+                      />
+                  ))
                 }
-              </Text>
+            </List>
+          </ScrollView>
+              <Modal
+                  isVisible={this.state.modalVisible}
+                  backdropOpacity={0.7}
+                  onBackdropPress={() => { this.setModalVisible(!this.state.modalVisible)}}
+              >
+                <Card 
+                  title={Object.keys(this.state.data).length !== 0 ? this.state.currentOpenIndex + '. ' + this.state.data.siteName : ''}
+                  containerStyle={{borderRadius: 5}}
+                  style={{
+                  flex: 1,
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  height: '75%',
+                  width: '75%',
+                  backgroundColor: 'white'}}>
+                      {
+                        Object.keys(this.state.data).map((item) => {
+                          const upper = (item.charAt(0).toUpperCase() + item.substr(1)).match(/[A-Z][a-z]*/g).join(' ');
+                          return(<View>
+                                    <Text style={{marginTop: '1%', marginBottom: '1%'}}> {upper + ': ' + this.state.data[item] + '\n'}</Text> 
+                                    <Divider/>
+                                </View>)
+                        })
+                      }
 
-              <Button 
-                title="Hide Modal"
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}>
-                </Button>
-            </View>
-            </View>
-            </Modal>
-            {
-               this.props.camps.map((item, index) => (
-                  <TouchableOpacity
-                     key = {(item.idpCamp ? item.idpCamp : item.nearbyIdpCamp)}
-                     style = {styles.container}
-                     onPress = {() => this.handleCampChoice(item.idpCamp)}>
-                     <Text style = {styles.text}>
-                        {(item.idpCamp ? `${index+1}. ${item.idpCamp}` : item.nearbyIdpCamp)}
-                     </Text>
-                     <Badge containerStyle={styles.badge}>
-                            <Text>{item.score/10}%</Text>
-                        </Badge>
-                  </TouchableOpacity>
-               ))
-            }
-         </ScrollView>
+                    <Button 
+                      title="Hide"
+                      onPress={() => {
+                        this.setModalVisible(!this.state.modalVisible);
+                      }}>
+                      </Button>
+                </Card>
+              </Modal>
          </View>
       )
    }
@@ -92,6 +121,5 @@ const styles = StyleSheet.create ({
    badge: {
     backgroundColor: 'lightgreen',
     alignContent: 'flex-end',
-   },
-
+   }
 })
