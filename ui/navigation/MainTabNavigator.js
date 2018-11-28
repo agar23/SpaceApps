@@ -1,7 +1,8 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
+import { Icon } from 'react-native-elements';
+import { Ionicons } from '@expo/vector-icons';
 import TabBarIcon from '../components/TabBarIcon';
 import EmergencyScreen from '../screens/Emergency';
 import DetailsScreen from '../screens/Details';
@@ -14,22 +15,18 @@ const ProfileStack = createStackNavigator({ Profile: ProfileScreen });
 
 EmergencyStack.navigationOptions = {
   tabBarLabel: 'Emergency',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={'md-checkmark-circle'}
-    />
-  ),
+
+  tabBarIcon: ({ focused }) => {
+    return <Icon name='warning'  />
+  }
 };
 
 DetailsStack.navigationOptions = {
   tabBarLabel: 'Camps',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={'md-bonfire'}
-    />
-  ),
+   
+  tabBarIcon: ({ focused }) => {
+    return <Icon name='list'  />
+  },
 };
 
 ProfileStack.navigationOptions = {
