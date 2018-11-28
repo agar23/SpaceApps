@@ -14,9 +14,11 @@
   },
   "dependencies": {
     "@expo/samples": "2.1.1",
+    "@expo/vector-icons": "^8.0.0",
     "@mapbox/polyline": "^1.0.0",
     "axios": "^0.18.0",
     "expo": "^30.0.1",
+    "merge": ">=1.2.1",
     "postman": "^0.2.0",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
@@ -26,8 +28,7 @@
     "react-native-material-kit": "^0.5.1",
     "react-native-popup-dialog": "^0.15.1",
     "react-navigation": "^2.16.0",
-    "tcomb-form-native": "^0.6.20",
-    "merge": ">=1.2.1"
+    "tcomb-form-native": "^0.6.20"
   },
   "devDependencies": {
     "jest-expo": "30.0.0"
