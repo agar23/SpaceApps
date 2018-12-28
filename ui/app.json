@@ -21,6 +21,7 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.kasa.kasa",
       "supportsTablet": true
     },
     "android": { 
