@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { List, ListItem, Divider, Badge, Icon, Card } from 'react-native-elements'
 import { Text, View, TouchableOpacity, StyleSheet, ScrollView, Linking, TouchableHighlight, Button } from 'react-native'
-import data from '../assets/camp_info.json';
 import PopupDialog from 'react-native-popup-dialog';
 import Modal from "react-native-modal";
 
+import data from '../assets/camp_info.json';
+import { determineBadgeColor } from '../util/utils';
    
 class ScrollList extends Component {
   state = {
@@ -27,14 +28,17 @@ class ScrollList extends Component {
   }
 
    render() {
-     console.log(this.state.data);
       return (
         <View>
           <ScrollView>
             <List>
-              
                 {
-                  this.props.camps.map((item, index) => (
+                  this.props.camps.map((item, index) => {
+                    const badgeStyle = {
+                      backgroundColor: determineBadgeColor(item.score / 10),
+                      alignContent: 'flex-end'
+                    };
+                    return (
                       <ListItem
                         key = {(item.idpCamp ? item.idpCamp : item.nearbyIdpCamp)}
                         style = {styles.container}
@@ -51,7 +55,7 @@ class ScrollList extends Component {
                                         </Text>
                                     </View>
                                     <View style={{alignContent: 'flex-end', display: 'flex', flexDirection: 'row'}}>
-                                        <Badge containerStyle={styles.badge}>
+                                        <Badge containerStyle={badgeStyle}>
                                             <Text>{item.score / 10}%</Text>
                                         </Badge>
                                     </View>
@@ -63,7 +67,8 @@ class ScrollList extends Component {
                                       }
                                   
                       />
-                  ))
+                    );
+                  })
                 }
             </List>
           </ScrollView>
@@ -117,9 +122,5 @@ const styles = StyleSheet.create ({
    },
    text: {
       color: '#4f603c'
-   },
-   badge: {
-    backgroundColor: 'lightgreen',
-    alignContent: 'flex-end',
    }
 })
