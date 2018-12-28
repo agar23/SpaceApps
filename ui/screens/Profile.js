@@ -20,9 +20,19 @@ const basicInfo = [
     icon: 'date-range'
   },
   {
+    title: 'Household Count',
+    details: '1',
+    icon: 'home'
+  },
+  {
     title: 'Phone Number',
     details: '+234 453-3834',
     icon: 'phone'
+  },
+  {
+    title: 'Email',
+    details: 'john.doe@gmail.com',
+    icon: 'mail'
   }
  ]
 
