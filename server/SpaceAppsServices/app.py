@@ -1,28 +1,29 @@
 from flask import Flask, request, make_response
 from flask_restplus import Resource, Api
 from score_calculation import *
-import json
-import os, sys
+from firebase import firebase
+import json, os, sys
+import constants
 
 app = Flask(__name__)
 api = Api(app)
 
 @api.route('/whereToGo')                   
 class whereToGo(Resource):            
-    def get(self):                     
-        with open("./resources/score_list.json") as f:
-            data = json.load(f)
-            response = make_response(json.dumps(data))
-            response.headers['content-type'] = 'application/json'
+    def get(self):                  
+        firebaseApp = firebase.FirebaseApplication(constants.FIREBASE_BASE_URL, None)
+        data = firebaseApp.get('/scoreList', None)
+        response = make_response(json.dumps(data))
+        response.headers['content-type'] = 'application/json'
         return response
         
 @api.route('/whereToCamp')                   
 class whereToGo(Resource):            
     def get(self):                     
-        with open("./resources/vegetation_means.json") as f:
-            data = json.load(f)
-            response = make_response(json.dumps(data))
-            response.headers['content-type'] = 'application/json'
+        firebaseApp = firebase.FirebaseApplication(constants.FIREBASE_BASE_URL, None)
+        data = firebaseApp.get('/vegetationMeans', None)
+        response = make_response(json.dumps(data))
+        response.headers['content-type'] = 'application/json'
         return response
 
 if __name__ == '__main__':
