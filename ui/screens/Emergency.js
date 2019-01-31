@@ -5,6 +5,7 @@ import RecommendedList from '../components/RecommendedList';
 import Map from '../components/Map'
 import campsExt from '../assets/top_camps.json';
 import { initialRegion } from '../constants/Constants';
+import ProfileForm from '../components/ProfileForm';
 
 export default class EmergencyScreen extends React.Component {
   static navigationOptions = {
@@ -13,7 +14,8 @@ export default class EmergencyScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
+      profileFormModalOpen: true ,
       camps: [], 
       coords: [],
       error: null,
@@ -37,6 +39,10 @@ export default class EmergencyScreen extends React.Component {
     })
   }
 
+  closeModal = () => {
+    this.setState({profileFormModalOpen: false})
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -50,6 +56,7 @@ export default class EmergencyScreen extends React.Component {
           camps={this.state.camps}
           setStartCoords={this.setStartCoords} 
         />
+        <ProfileForm open={this.state.profileFormModalOpen} closeModal={this.closeModal}/>
       </SafeAreaView>
     );
   }
