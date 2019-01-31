@@ -1,9 +1,9 @@
 {
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://k4-gnf.anonymous.ui.exp.direct",
-  "packagerNgrokUrl": "https://packager.k4-gnf.anonymous.ui.exp.direct",
-  "ngrokPid": 59481,
+  "expoServerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "devToolsPort": 19002,
-  "packagerPort": 19001,
-  "packagerPid": 59449
+  "packagerPort": null,
+  "packagerPid": null
 }
