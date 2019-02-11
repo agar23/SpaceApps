@@ -1,4 +1,6 @@
 node_modules/**/*
 .expo/**/*
 ui/node_modules/**/*
-server/SpaceAppsServices/**/*.pyc
+services/*.pyc
+.vscode/**/*
+services/resources/firebase.json
